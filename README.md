@@ -1,71 +1,99 @@
-# nixpkgs-review README
-
-This is the README for your extension "nixpkgs-review". After writing up a brief description, we recommend including the following sections.
-
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Here's a comprehensive `README.md` for your extension:
 
 ---
 
-## Following extension guidelines
+# Nixpkgs Review Helper for Visual Studio Code
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+This is a Visual Studio Code (VSCode) extension that helps you easily review pull requests (PRs) for the `nixpkgs` repository using the [`nixpkgs-review` ](https://github.com/Mic92/nixpkgs-review) tool. The extension allows you to either manually enter a PR number or URL, or automatically fetch PRs where you are a reviewer or assigned. You can then run the `nixpkgs-review` tool on the selected PRs.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## Features
 
-## Working with Markdown
+* **Review a PR Manually**: Enter the PR number or GitHub PR URL to run `nixpkgs-review`.
+* **Review PRs Where You're a Reviewer**: Automatically fetch PRs where you're assigned or a reviewer, and run `nixpkgs-review` on them.
+* **Supports VsCode GitHub Authentication**: Uses your GitHub credentials to fetch PRs from the repository.
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+## Prerequisites
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+Before using this extension, you need to have the following tools installed:
 
-## For more information
+* **VSCode**: Install [Visual Studio Code](https://code.visualstudio.com/).
+* **Nix**: Install [Nix package manager](https://nixos.org/download.html) on your machine. 
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Installation
 
-**Enjoy!**
+1. Open VSCode.
+2. Navigate to the Extensions panel (`Ctrl+Shift+X`).
+3. Search for `nixpkgs-review-helper`.
+4. Click **Install**.
+
+Or, you can install the extension from the VSCode marketplace via the [WIP](https://marketplace.visualstudio.com/).
+
+## Usage
+
+Once the extension is installed, you can use the following commands:
+
+1. **Manually Review a PR**:
+
+   * Press `F1` or `Ctrl+Shift+P` to open the Command Palette.
+   * Type `Nixpkgs Review Helper: Review PR` and press `Enter`.
+   * Enter the PR number or GitHub URL when prompted.
+
+2. **Automatically Fetch PRs Where You're a Reviewer**:
+
+   * Press `F1` or `Ctrl+Shift+P` to open the Command Palette.
+   * Type `Nixpkgs Review Helper: Fetch & Review My PRs` and press `Enter`.
+   * The extension will fetch PRs where you are a reviewer or assigned and list them in the output channel.
+
+### Options
+
+* **Post Results**:
+  You can choose to post the results of the review to a GitHub issue or other endpoint if you include the `--post-result` flag when prompted.
+
+## How It Works
+
+1. **GitHub Authentication**:
+   The extension uses the GitHub API to fetch PRs where you're assigned or a reviewer. You'll be prompted to authenticate using your GitHub account. The extension uses your GitHub access token to perform operations on the PRs.
+
+2. **Nixpkgs Review**:
+   The extension runs `nixpkgs-review` on the selected PR. If `nixpkgs-review` is not found in your `PATH`, the extension will fall back to using `nix run nixpkgs#nixpkgs-review`.
+
+3. **Post-Result Flag**:
+   If you want to publish the results, you can include the `--post-result` flag when the extension prompts you for the review options. This can post the review results back to GitHub or another endpoint.
+
+
+## Error Handling
+
+* **Missing Commands**: If the required commands (`nix`, `git`, `nixpkgs-review`) are not found on your system, the extension will show an error message and advise you to install them.
+* **GitHub Authentication Failures**: If the extension fails to authenticate with GitHub, it will display an error message and prompt you to retry authentication.
+
+## Debugging
+
+If you're encountering issues or want to debug the output of the `nixpkgs-review` command, you can view the detailed logs in the **Output** panel in VSCode. The logs will show all the commands being executed and any errors returned by the tools.
+
+## Known Issues
+
+* The extension currently only supports reviewing PRs from the `nixpkgs` repository on GitHub.
+* It relies on the availability of `nixpkgs-review` in your `PATH` or the ability to run it via `nix run`.
+
+## Contributing
+
+If you'd like to contribute to this extension, feel free to submit an issue or a pull request. Contributions are welcome!
+
+### Steps to Contribute:
+
+1. Fork the repository.
+2. Clone your fork to your local machine.
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+4. Run the extension in VSCode's debug mode:
+
+   * Press `F5` to open a new window with the extension loaded.
+5. Make your changes and submit a pull request.
+
+## License
+
+This extension is open-source and released under the MIT License.
+
