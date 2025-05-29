@@ -1,7 +1,8 @@
 {
   "name": "nixpkgs-review",
   "displayName": "nixpkgs-review",
-  "description": "Nixpkgs vscode integration",
+  "description": "unofficial Nixpkgs-review vscode integration",
+  "publisher": "rucadi",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.100.0"
@@ -9,6 +10,10 @@
   "categories": [
     "Other"
   ],
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/Rucadi/nixpkgs-review-vscode.git"
+  },
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
